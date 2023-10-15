@@ -10,6 +10,31 @@ Antes de iniciar, certifique-se de ter as seguintes dependências instaladas:
 - PostgreSQL
 - TypeScript
 
+## Tecnologias Utilizadas
+
+- Node.js
+- Express
+- PostgreSQL
+- TypeORM
+- JSON Web Tokens (JWT)
+
+## Instalação
+Execute o seguinte comando para instalar as dependências do projeto:
+
+- npm install
+
+## Scripts
+
+- npm run build: Compila o código TypeScript.
+- npm run migration:generate: Gera uma migration usando TypeORM.
+- npm run migration:run: Executa migrations do banco de dados.
+
+## Uso
+
+Para compilar o código TypeScript e iniciar o servidor de desenvolvimento, utilize o seguinte comando:
+
+- dev:server : inicia o projeto.
+
 ## Configuração
 
 Crie um arquivo `.env` na raiz do seu projeto com as seguintes variáveis de ambiente:
@@ -23,18 +48,3 @@ DB_NAME=
 BOT_TOKEN=
 PORT=
 JWT_PASS=
-
-Scripts
-
-npm run build: Compila o código TypeScript.
-npm run migration:generate: Gera uma migration usando TypeORM.
-npm run migration:run: Executa migrations do banco de dados.
-dev:server : inicia o projeto.
-
-Tecnologias Utilizadas
-
-Node.js
-Express
-PostgreSQL
-TypeORM
-JSON Web Tokens (JWT)
