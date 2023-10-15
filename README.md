@@ -1,6 +1,6 @@
 # Telex
 
-Telex é um projeto de criação de APIs que monitoram o recebimento e envio de mensagens para um bot do Telegram. Ele fornece um painel de administração que permite aos usuários ver suas mensagens recebidas, enviar mensagens e acompanhar todas as mensagens enviadas para o bot. Essas funcionalidades são essenciais para a interação eficiente com a comunidade conectada ao bot.
+Telex é um projeto de APIs que monitoram o recebimento e envio de mensagens para um bot do Telegram. Ele fornece informações a um painel de administração que permite aos usuários ver suas mensagens recebidas, enviar mensagens e acompanhar todas as mensagens enviadas para o bot. Essas funcionalidades são essenciais para a interação eficiente com a comunidade conectada ao bot.
 
 ## Pré-requisitos
 
