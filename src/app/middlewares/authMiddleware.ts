@@ -22,20 +22,27 @@ export const authMiddleware = async (
 ) => {
   const { authorization } = req.headers;
 
-  if (!authorization)
+  if (!authorization) {
     return res.status(401).json({ message: 'Não autorizado' });
+  }
 
   const token = authorization.split(' ')[1];
 
-  const { id } = jwt.verify(token, process.env.JWT_PASS!) as JwtPayload;
+  try {
+    const { id } = jwt.verify(token, process.env.JWT_PASS!) as JwtPayload;
 
-  const user = await UserRepository.getUserById(id);
+    const user = await UserRepository.getUserById(id);
 
-  if (!user) return res.status(401).json({ message: 'Não autorizado' });
+    if (!user) {
+      return res.status(401).json({ message: 'Não autorizado' });
+    }
 
-  const { password: _, ...userLogin } = user;
+    const { password: _, ...userLogin } = user;
 
-  req.user = userLogin as Partial<User>;
+    req.user = userLogin as Partial<User>;
 
-  next();
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: 'Token JWT inválido' });
+  }
 };

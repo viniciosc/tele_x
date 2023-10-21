@@ -49,7 +49,6 @@ export const updateUser = async (
     } else {
       if (!userExists.chatId) {
         newUser = await userRepository.update({ name: name }, { name, chatId });
-        console.log('foi');
       } else {
         throw new Error('Usuário ja cadastrado com chatId');
       }

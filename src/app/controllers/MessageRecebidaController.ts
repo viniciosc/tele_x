@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { io } from '../../server';
 import { IMessageRecebida } from '../interfaces/IMessageRecebida';
 
 import MessageRecebidaRepository from '../repositories/MessageRecebidaRepository';
@@ -20,6 +21,7 @@ export const createMessage = async (message: IMessageRecebida) => {
     const newMessage =
       await MessageRecebidaRepository.messageRecebidaRepository.save(message);
 
+    io.emit('messagemRecebida', newMessage);
     return {
       status: 'success',
       message: 'Mensagem criada com sucesso',

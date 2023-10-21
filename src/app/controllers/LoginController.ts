@@ -12,6 +12,11 @@ loginRouter.post(
   '/login',
   async (req: Request, res: Response): Promise<Response> => {
     const { name, password } = req.body;
+
+    if (!name && !password) {
+      return res.status(400).json({ message: 'Usuário ou senha inválidos!' });
+    }
+
     const user = await UserRepository.getUserByName(name);
 
     if (!user)
