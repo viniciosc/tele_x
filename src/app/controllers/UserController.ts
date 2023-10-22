@@ -41,11 +41,13 @@ userRouter.post(
   }
 );
 
+//ALTERAR O NOME DO USUARIO CASO ELE TENHA DIGITADO UM NOME ERRADO DO TELEGRAM
 userRouter.patch(
   '/users/:userId',
   async (req: Request, res: Response): Promise<Response> => {
     try {
       const { name } = req.body;
+
       const userId = req.params.userId;
       const newUser = await updateUser(name, '', userId);
 

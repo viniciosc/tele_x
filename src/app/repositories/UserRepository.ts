@@ -40,23 +40,27 @@ export const updateUser = async (
   chatId?: string,
   userId?: string
 ) => {
-  const userExists = await getUserByName(name);
-
-  if (userExists) {
-    let newUser;
-    if (userId) {
+  let newUser;
+  if (userId) {
+    const userExists = await getUserById(userId);
+    if (userExists) {
       newUser = await userRepository.update({ id: userId }, { name });
+      return newUser;
     } else {
+      throw new Error('Usuário não encontrado');
+    }
+  } else {
+    const userExists = await getUserByName(name);
+    if (userExists) {
       if (!userExists.chatId) {
         newUser = await userRepository.update({ name: name }, { name, chatId });
+        return newUser;
       } else {
         throw new Error('Usuário ja cadastrado com chatId');
       }
+    } else {
+      throw new Error('Usuário não encontrado');
     }
-
-    return newUser;
-  } else {
-    throw new Error('Usuário não encontrado');
   }
 };
 

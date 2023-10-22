@@ -10,12 +10,19 @@ const userRepository = AppDataSource.getRepository(User);
 const messageRepository = AppDataSource.getRepository(Message);
 
 const getMessage = async (userId: string): Promise<IUser | {}> => {
-  const userMensages = await userRepository.find({
-    where: { id: userId },
-    relations: ['messages'],
-  });
+  const userMensages = await userRepository
+    .createQueryBuilder('user')
+    .leftJoinAndSelect('user.messages', 'messages')
+    .where('user.id = :userId', { userId })
+    .orderBy('messages.createdAt', 'DESC')
+    .getMany();
 
   if (userMensages) {
+    if (userMensages[0] && 'password' in userMensages[0]) {
+      const { password, ...userWithoutPassword } = userMensages[0];
+      return [userWithoutPassword, ...userMensages.slice(1)];
+    }
+
     return userMensages;
   }
 

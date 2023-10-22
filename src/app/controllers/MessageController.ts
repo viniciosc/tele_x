@@ -14,7 +14,6 @@ messageRouter.get(
   async (req: Request, res: Response): Promise<Response> => {
     const userId = req.params.userId;
     const messages = await MessageRepository.getMessage(userId);
-
     return res.status(200).json(messages);
   }
 );
